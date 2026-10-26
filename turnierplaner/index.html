@@ -219,8 +219,8 @@ function rgV(){const a=st.rgt==null?0:st.rgt,z=st.rgz==null?1:st.rgz,r=rgrec(a,z
 cl=m=>m===r?' class="rec"':'',
 row=(h,v)=>`<tr><th>${h}</th>${['rr','ko','gk'].map((m,i)=>`<td${cl(m)}>${v[i]}</td>`).join('')}</tr>`;
 return `<div class="ov"><div class="dl" style="max-height:90%;overflow-y:auto"><p style="margin:0 0 8px;font-size:calc(20px*var(--fs));font-weight:700">Turnier-Ratgeber</p><div class="lab">Wie viele Teams?</div>${seg('t',a,['bis 8','9–16','über 16'])}<div class="lab">Wie viel Zeit habt ihr?</div>${seg('z',z,['Viel','Mittel','Wenig'])}<div class="inf"><b>Empfehlung: ${RGM[r][0]}</b><br>${RGM[r][1]}</div><button class="b p" style="width:100%" data-a="rgn" data-k="${r}">Turnier damit anlegen</button><h3 style="text-align:left">Die Spielformen im Vergleich</h3><div style="overflow-x:auto"><table class="rgt"><tr><th></th>${['rr','ko','gk'].map(m=>`<th${cl(m)}>${RGM[m][0]}</th>`).join('')}</tr>${row('Teams',['Klein (3–8)','Beliebig (ideal 8, 16, 32)','Mittel bis groß (ab 8)'])}${row('Garantierte Spiele pro Team',['Sehr hoch (n−1)','Niedrig (oft nur 1 Spiel)','Moderat (mind. 2–3 Spiele)'])}${row('Dauer',['Sehr lang','Sehr kurz','Mittel'])}${row('Fairness',['Sehr hoch','Mittel (Tagesform entscheidet)','Hoch'])}</table></div><p class="mt" style="margin:10px 0 14px">Passt die Teamzahl nicht zu einer vollen K.o.-Runde (zum Beispiel 6 Teams), bekommen einige Teams ein Freilos und steigen später ein. Punkte und Regeln stellst du unter „Einstellungen“ ein.</p><button class="b" style="width:100%" data-a="rgc">Schließen</button></div></div>`}
-const SK=KEY+'-set',SD={wake:true,sound:true,cheer:true,theme:'auto',pw:3,pd:1,pl:0,tb:'diff',dur:10,fields:1,mode:'rr',et:5,rs:30};
-let S=(()=>{try{return Object.assign({},SD,JSON.parse(localStorage.getItem(SK))||{})}catch(e){return Object.assign({},SD)}})();
+const SK=KEY+'-set',SD={wake:true,sound:true,cheer:true,theme:'auto',pw:3,pd:1,pl:0,tb:'diff',dur:5,fields:1,mode:'rr',et:5,rs:30};
+let S=(()=>{try{return Object.assign({},SD,JSON.parse(localStorage.getItem(SK))||{})}catch(e){return Object.assign({},SD)}})();if(S.m2!==1){S.m2=1;S.fields=1;S.dur=5;try{localStorage.setItem(SK,JSON.stringify(S))}catch(e){}}
 const saveS=()=>{try{localStorage.setItem(SK,JSON.stringify(S))}catch(e){}};
 const applyTheme=()=>{const h=document.documentElement;if(S.theme==='auto')h.removeAttribute('data-theme');else h.setAttribute('data-theme',S.theme)};
 let AC=null;const ac=()=>{try{if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume()}catch(e){}return AC};
@@ -311,7 +311,7 @@ case'menu':st.mn=true;break;
 case'info':st.mn=false;st.d={q:INFO[d.k],sm:d.k==='Impressum'};break;
 case'dc':st.d=null;st.mn=false;st.sh=false;break;case'fs':st.fs=Math.min(1.6,Math.max(.8,Math.round((st.fs+ +d.d*.1)*10)/10));try{localStorage.setItem(KEY+'-fs',st.fs)}catch(e){}break;
 case'dok':{const x=st.d;st.d=null;return A(x.act)}
-case'new':st.v='new';st.f={name:'Mein Turnier '+new Date().toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'2-digit'})+' - '+new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})+' Uhr',teams:4,fields:S.fields,dur:S.dur,mode:S.mode,groups:2,adv:2,p3:false};break;
+case'new':st.v='new';st.f={name:'Mein Turnier '+new Date().toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'2-digit'})+' - '+new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})+' Uhr',teams:5,fields:S.fields,dur:S.dur,mode:S.mode,groups:2,adv:2,p3:false};break;
 case'home':st.v='home';st.edit=false;st.end=false;break;
 case'open':{st.id=d.id;st.v='t';st.tab='plan';const c=cur();st.end=!!c.done;if(c.mode&&c.mode!=='rr'&&!c.drawn){st.v='draw';st.dr={phase:'idle',seq:[],k:0}}break}
 case'edit':st.edit=!st.edit;break;
