@@ -119,7 +119,7 @@ table.tb{font-size:calc(14px*var(--fs)*1.2)}.tb th{font-size:calc(12px*var(--fs)
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--nac:#8aa9ff;--ntg:#2b2b2b}}
 :root[data-theme="dark"]{--nac:#8aa9ff;--ntg:#2b2b2b}
 .c.nc{border:1px solid var(--ln);border-left:5px solid var(--su);border-radius:16px;padding:12px 14px 14px;margin-bottom:12px;background:var(--sf)}
-.nc.nop{border-color:var(--nac)}.nc.nrun{border-color:var(--rd)}.nc.nps{border:2px solid var(--su);border-left:5px solid var(--su)}.nc.ned{border:2px solid var(--nac)}
+.nc.nend{border-color:var(--bd)}.nc.nop{border-color:var(--nac)}.nc.nrun{border-color:var(--rd)}.nc.nps{border:2px solid var(--su);border-left:5px solid var(--su)}.nc.ned{border:2px solid var(--nac)}
 .nh{display:grid;grid-template-columns:auto 1fr auto;align-items:center;min-height:calc(30px*var(--fs));font-size:calc(14px*var(--fs));gap:6px}
 .nl{display:flex;align-items:center;gap:6px;white-space:nowrap;color:var(--dg)}.nh>:last-child{justify-self:end}.ntm{text-align:center}.nl .dot{margin-right:0}
 .nrun .nl{color:var(--rd)}.nps .nl{color:var(--dg)}.nrun .dot{background:var(--rd)}.nps .dot{background:var(--su)}
@@ -132,10 +132,10 @@ table.tb{font-size:calc(14px*var(--fs)*1.2)}.tb th{font-size:calc(12px*var(--fs)
 .nt{border:0;border-radius:12px;padding:0 14px;min-height:calc(52px*var(--fs));display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--ntg);color:var(--tx);font:inherit;text-align:left}.nt.r{flex-direction:row-reverse;text-align:right}
 .nt .nn{font-size:calc(16px*var(--fs));line-height:1.15;font-weight:700;overflow-wrap:anywhere;min-width:0}.nt b{font-size:calc(28px*var(--fs));font-weight:700}
 .ng.mo .nt{justify-content:flex-start}.ng.mo .nt.r{justify-content:flex-end}
-.ng.ml .nt{background:var(--tl);color:var(--nac)}.nps .ng.ml .nt{background:var(--ntg);color:var(--dg)}.ng.me .nt{color:var(--dg)}
+.ng.ml .nt{background:var(--tl);color:var(--nac)}.nps .ng.ml .nt{background:var(--ntg);color:var(--dg)}.ng.me .nt{color:var(--tx)}
 .nbs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 .nbt{height:calc(44px*var(--fs));border-radius:99px;border:2px solid var(--nac);background:none;color:var(--nac);font:inherit;font-size:calc(16px*var(--fs));font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px}.nbt.f{background:var(--ac);border-color:var(--ac);color:var(--on)}.nbt .mi{width:1.25em;height:1.25em}
-.nu{margin-top:10px;display:flex;justify-content:center}
+.nbs.one{grid-template-columns:1fr}.nu{margin-top:10px;display:flex;justify-content:center}
 .ro .nc .nbs,.ro .nc [data-a="play"],.ro .nc [data-a="undo"],.ro .nc .nu{display:none!important}.ro .nc .nt{pointer-events:none}
 </style></head><body><div id="app"></div>
 <script>
@@ -287,7 +287,7 @@ if(pend(m))return card0(t,m,i);
 if(m.s==='o')return `<div class="c nc nop"><div class="nh"><span class="nl">Feld ${fe} · ${clk(t,m,i,'idle')}</span><span></span><button class="nact" data-a="play" data-i="${i}">${ic('play')} Spiel starten</button></div>${tl(A,B,0,0,'mo','div')}</div>`;
 const dur=`<span class="npl">${ic('check')} Beendet</span>`;
 if(m.s==='e'){const pk=m.ko&&m.sa===m.sb&&m.pa!=null&&m.pa!==m.pb;return `<div class="c nc nend"><div class="nh"><span class="nl">Feld ${fe} · ${dur} <span class="ndu">${fmt(m.el).replace(/^0/,'')} ${m.el<60?'Sek.':'Min.'}</span></span><span></span><button class="nact reg" data-a="reopen" data-i="${i}">Bearbeiten</button></div>${tl(A,B,m.sa,m.sb,'me','button')}${pk?`<div class="ndu" style="text-align:center;margin-top:6px">n. E. ${m.pa} : ${m.pb}</div>`:''}${undec(m)?'<div style="text-align:center"><button class="lk" data-a="tie" data-i="'+i+'">Sieger festlegen</button></div>':''}</div>`}
-if(m.s==='b')return `<div class="c nc ned"><div class="nh"><span class="nl">Feld ${fe} · ${dur}</span><span></span><button class="nact" data-a="fix" data-i="${i}">${ic('check')} Fertig</button></div>${tl(A,B,m.sa,m.sb,'mb','button')}<div class="nu"><button class="nund" data-a="undo" data-i="${i}" ${m.h.length?'':'disabled'}>${ic('undo')} Rückgängig</button></div></div>`;
+if(m.s==='b')return `<div class="c nc ned"><div class="nh"><span class="nl">Feld ${fe} · ${dur}</span><span></span><button class="nact" data-a="fix" data-i="${i}">${ic('check')} Fertig</button></div>${tl(A,B,m.sa,m.sb,'mq','button')}<div class="nu"><button class="nund" data-a="undo" data-i="${i}" ${m.h.length?'':'disabled'}>${ic('undo')} Rückgängig</button></div><div class="nbs one"><button class="nbt f" data-a="play" data-i="${i}">${ic('play')} Fortsetzen</button></div></div>`;
 const run=m.s==='l',o=ov(t,m);
 const lab=m.x&&o?' · Nachspielzeit':o?'<span class="chip">+ Nachspielzeit</span>':m.s==='p'&&!RO?' · Pausiert':'';
 return `<div class="c nc ${run?'nrun':'nps'}"><div class="nh"><span class="nl"><span class="dot${run?' pulse':' st'}" aria-hidden="true"></span>Feld ${fe}${lab}</span><span class="ntm">${clk(t,m,i,run?'run':'idle')}</span><button class="nund" data-a="undo" data-i="${i}" ${m.h.length?'':'disabled'}>${ic('undo')} Rückgängig</button></div>${tl(A,B,m.sa,m.sb,'ml','button')}<div class="nbs">${run?`<button class="nbt" data-a="play" data-i="${i}">${ic('pause')} Pausieren</button><button class="nbt f" data-a="askstop" data-i="${i}">${ic('stop')} Beenden</button>`:`<button class="nbt f" data-a="play" data-i="${i}">${ic('play')} Fortsetzen</button><button class="nbt" data-a="askstop" data-i="${i}">${ic('stop')} Beenden</button>`}</div></div>`}
