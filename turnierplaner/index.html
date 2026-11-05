@@ -303,8 +303,7 @@ if(m.s==='e'){const pk=m.ko&&m.sa===m.sb&&m.pa!=null&&m.pa!==m.pb;return `<div c
 if(m.s==='b')return `<div class="c nc ned">${hd(`<span class="sp">${tt}</span>`,'')}${tl(m.sa,m.sb,'mq','button')}${ft(1,bt('play','play','Weiter',1),bt('fix','check','Fertig',0))}</div>`;
 const run=m.s==='l',o=ov(t,m);
 const pill=run?`<span class="npl run"><span class="dot pulse" aria-hidden="true"></span>Läuft</span>`:`<span class="npl">${ic('pause')} Pausiert</span>`;
-const lab=m.x&&o?`<span class="chip">Nachspielzeit</span>`:o?'<span class="chip">+ Nachspielzeit</span>':'';
-return `<div class="c nc ${run?'nrun':'nps'}">${hd(clk(t,m,i,run?'run':'idle'),pill+lab)}${tl(m.sa,m.sb,'ml','button')}${ft(1,bt('play',run?'pause':'play',run?'Pause':'Weiter',1),bt('askstop','stop','Ende',0))}</div>`}
+return `<div class="c nc ${run?'nrun':'nps'}">${hd(clk(t,m,i,run?'run':'idle'),pill)}${tl(m.sa,m.sb,'ml','button')}${ft(1,bt('play',run?'pause':'play',run?'Pause':'Weiter',1),bt('askstop','stop','Ende',0))}</div>`}
 const card=(t,m,i)=>{let h=(S.ds==='neu'?card0n:card0)(t,m,i).replace('<div class="c','<div id="m'+i+'" class="c');if(t.mode==='gk'&&!m.ko)h=h.replace('Feld '+m.f,'Feld '+m.f+' · Gr. '+L[m.gi]);return h};
 const gkey=(t,m)=>m.ko?(m.p3?'p':'k'+m.r):t.mode==='gk'?'g':'r'+m.r,gidx=(t,k)=>t.m.map((m,i)=>i).filter(i=>gkey(t,t.m[i])===k&&!pend(t.m[i]));
 function rh(t,k,title){if(k==='g'||k==='p')return `<h3>${title}</h3>`;const G=gidx(t,k).map(i=>t.m[i]);if(G.length<2)return `<h3>${title}</h3>`;const op=G.filter(m=>m.s==='o').length;let a='',l='';if(G.every(m=>m.s==='l')){a='stopall';l='Spiele beenden'}else if(op>=2){a='playall';l=op===2?'Beide starten':'Alle '+op+' starten'}return a?`<div class="rh"><span></span><h3>${title}</h3><button class="lk rhl" data-a="${a}" data-k="${k}">${l}</button></div>`:`<h3>${title}</h3>`}
