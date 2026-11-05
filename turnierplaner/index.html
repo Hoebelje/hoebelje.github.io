@@ -131,7 +131,17 @@ table.tb{font-size:calc(14px*var(--fs)*1.2)}.tb th{font-size:calc(12px*var(--fs)
 .ng.mo .nt{justify-content:flex-start}
 .ng.ml .nt{background:var(--tl);color:var(--nac)}.nps .ng.ml .nt{background:var(--ntg);color:var(--dg)}
 .nfo{display:flex;justify-content:space-between;align-items:center;margin-top:10px;min-height:calc(40px*var(--fs))}
-.nund{background:none;border:0;color:var(--nac);font:inherit;font-size:calc(14px*var(--fs));display:flex;align-items:center;gap:4px;min-height:calc(40px*var(--fs));padding:0}.nund:disabled{opacity:.4}.nund.hid{visibility:hidden}.nund .mi{width:1.1em;height:1.1em}
+.nund{background:none;border:0;color:var(--nac);font:inherit;font-size:calc(14px*var(--fs));display:flex;align-items:center;gap:4px;min-height:calc(40px*var(--fs));padding:0}.nund:disabled{opacity:.4}.nund.hid{visibility:hidden}
+.nh.ne .ne1{display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden}
+.nbe{justify-self:end}
+.nh.nox{grid-template-columns:1fr auto}
+.nh.nox2 .ne1 .npl{display:none}
+.nbe{background:none;border:0;padding:0 0 0 10px;min-height:calc(30px*var(--fs));color:var(--nac);font:inherit;font-size:calc(15px*var(--fs));font-weight:700}
+.nh.nox .ntm{display:none}
+.ng.mo{grid-template-columns:1fr auto 1fr}
+.ng.mo .nt{background:none;padding:0 4px;min-height:calc(52px*var(--fs))}
+.ng.mo .nt.r{justify-content:flex-end}
+.ng.mo .nt.r .nn{text-align:right}.nund .mi{width:1.1em;height:1.1em}
 .nbs2{display:flex;gap:8px}.nsl{display:block;width:calc(104px*var(--fs))}
 .nbt{width:calc(104px*var(--fs));height:calc(40px*var(--fs));border-radius:99px;border:2px solid var(--nac);background:none;color:var(--nac);font:inherit;font-size:calc(15px*var(--fs));font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;padding:0}.nbt.f{background:var(--ac);border-color:var(--ac);color:var(--on)}.nbt .mi{width:1.2em;height:1.2em}
 .ro .nc .nfo,.ro .nc [data-a="play"]{display:none!important}.ro .nc .nt{pointer-events:none}
@@ -285,8 +295,8 @@ const hd=(mid,pill)=>`<div class="nh"><span class="nl">Feld ${m.f}</span><span c
 const bt=(a,ic0,tx,f)=>`<button class="nbt${f?' f':''}" data-a="${a}" data-i="${i}">${ic0?ic(ic0)+' ':''}${tx}</button>`;
 const ft=(un,l,r)=>`<div class="nfo"><button class="nund${un?'':' hid'}" data-a="undo" data-i="${i}" ${un&&m.h.length?'':'disabled'}>${ic('undo')} Rückgängig</button><span class="nbs2">${l||'<span class="nsl"></span>'}${r||'<span class="nsl"></span>'}</span></div>`;
 const tt=fmt(m.el);
-if(m.s==='o')return `<div class="c nc nop">${hd(clk(t,m,i,'idle'),'')}${tl(0,0,'mo','div')}${ft(0,bt('play','play','Starten',1),'')}</div>`;
-if(m.s==='e'){const pk=m.ko&&m.sa===m.sb&&m.pa!=null&&m.pa!==m.pb;return `<div class="c nc nend">${hd(`<span class="sp">${tt}</span>`,`<span class="npl">${ic('check')} Beendet</span>`)}${tl(m.sa,m.sb,'me','button')}${pk?`<div class="ndu" style="text-align:center;margin-top:6px">n. E. ${m.pa} : ${m.pb}</div>`:''}${ft(0,'',bt('reopen','','Bearbeiten',0))}${undec(m)?'<div style="text-align:center"><button class="lk" data-a="tie" data-i="'+i+'">Sieger festlegen</button></div>':''}</div>`}
+if(m.s==='o')return `<div class="c nc nop">${hd(clk(t,m,i,'idle'),'')}<div class="ng mo"><div class="nt"><span class="nn">${A}</span></div><span class="nsl">${bt('play','play','Starten',1)}</span><div class="nt r"><span class="nn">${B}</span></div></div></div>`;
+if(m.s==='e'){const pk=m.ko&&m.sa===m.sb&&m.pa!=null&&m.pa!==m.pb;return `<div class="c nc nend"><div class="nh ne"><span class="nl ne1"><span>Feld ${m.f}</span><span class="npl">Beendet</span></span><span class="ntm"><span class="npl">${tt}</span></span><button class="nbe" data-a="reopen" data-i="${i}">Bearbeiten</button></div>${tl(m.sa,m.sb,'me','button')}${pk?`<div class="ndu" style="text-align:center;margin-top:6px">n. E. ${m.pa} : ${m.pb}</div>`:''}${undec(m)?'<div style="text-align:center"><button class="lk" data-a="tie" data-i="'+i+'">Sieger festlegen</button></div>':''}</div>`}
 if(m.s==='b')return `<div class="c nc ned">${hd(`<span class="sp">${tt}</span>`,'')}${tl(m.sa,m.sb,'mq','button')}${ft(1,bt('play','play','Weiter',1),bt('fix','check','Fertig',0))}</div>`;
 const run=m.s==='l',o=ov(t,m);
 const pill=run?`<span class="npl run"><span class="dot pulse" aria-hidden="true"></span>Läuft</span>`:`<span class="npl">${ic('pause')} Pausiert</span>`;
@@ -341,7 +351,9 @@ const shr=()=>`<div class="ov"><div class="dl"><div class="lab" style="text-alig
 const qrs=u=>{try{const q=qrcode(0,'L');q.addData(u);q.make();return q.createSvgTag(Math.max(2,Math.floor(260/q.getModuleCount())))}catch(e){return '<span style="color:#000">Das Turnier ist zu groß für einen QR-Code. Nutze stattdessen den Link.</span>'}};
 function R(){document.body.classList.toggle('ro',RO);applyTheme();const dl0=$('.dl'),dy0=dl0?dl0.scrollTop:0;const t=cur();if((st.v==='t'||st.v==='draw')&&!t)st.v='home';document.documentElement.style.setProperty('--fs',st.fs);document.documentElement.style.setProperty('--rs',(S.rs||30)+'px');const sc=$('.main'),y=sc?sc.scrollTop:0,k=st.v+st.tab+st.id+(st.end?1:0);
 const b=st.v==='home'?home():st.v==='new'?nw():st.v==='draw'?drawV(t):st.end&&t.done?endv(t):tv(t);
-$('#app').innerHTML=hdr()+b+(st.se?seV():'')+(st.d?dlg():'')+(st.tie!=null?tieV():'')+(st.rg?rgV():'')+(st.sh?shr():'')+(st.mn?menu():'')+(st.toast?`<div class="ts" role="status">${st.toast}</div>`:'')+(st.v==='t'&&t?`<div id="pr">${prt(t)}</div>`:'');const n=$('.main');if(n&&k===st.lk)n.scrollTop=y;{const dl1=$('.dl');if(dl1&&(st.se||st.rg))dl1.scrollTop=dy0}st.lk=k;if(st.sc!=null){const e=$('#m'+st.sc);st.sc=null;if(e)e.scrollIntoView({block:'center'})}}
+$('#app').innerHTML=hdr()+b+(st.se?seV():'')+(st.d?dlg():'')+(st.tie!=null?tieV():'')+(st.rg?rgV():'')+(st.sh?shr():'')+(st.mn?menu():'')+(st.toast?`<div class="ts" role="status">${st.toast}</div>`:'')+(st.v==='t'&&t?`<div id="pr">${prt(t)}</div>`:'');const n=$('.main');if(n&&k===st.lk)n.scrollTop=y;{const dl1=$('.dl');if(dl1&&(st.se||st.rg))dl1.scrollTop=dy0}st.lk=k;if(st.sc!=null){const e=$('#m'+st.sc);st.sc=null;if(e)e.scrollIntoView({block:'center'})}fitNe()}
+function fitNe(){document.querySelectorAll('.nh.ne').forEach(h=>{h.classList.remove('nox','nox2');const l=h.firstElementChild,c=()=>l&&l.scrollWidth>l.clientWidth+1;if(c()){h.classList.add('nox');if(c())h.classList.add('nox2')}})}
+addEventListener('resize',fitNe);
 const cp=(x,msg)=>{try{navigator.clipboard.writeText(x).then(()=>toast(msg),()=>{st.d={q:'Zum Kopieren:',ta:x};R()})}catch(e){st.d={q:'Zum Kopieren:',ta:x};R()}};
 function toast(x){st.toast=x;R();setTimeout(()=>{st.toast=null;R()},2200)}
 const endm=(m,i)=>{if(m.ko&&m.sa===m.sb){m.pa=0;m.pb=0;st.tie=+i}};
